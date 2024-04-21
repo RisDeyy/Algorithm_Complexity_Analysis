@@ -67,7 +67,7 @@ def step5_concurrency(n, r):
     if rn > n:
         rn = n
     threads = []
-    ran = rn / 8
+    ran = rn / 4
     ran = math.floor(ran)
     if ran == 0:
         ran = 1
@@ -115,7 +115,7 @@ def aks_concurrency(n):
         return step3(n, r) and (step4(n, r) or step5_concurrency(n, r))
     return False
 if __name__=="__main__":
-    for k in range(1,7):
+    for k in range(1,3):
         exponent = k
         total_time = 0
         thousandths = 10 ** exponent / 100
@@ -128,3 +128,24 @@ if __name__=="__main__":
             total_time += (end - start) * 1000 
         average = total_time / (n-2)
         print(average)
+
+    # fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(10, 4))
+    # data = pd.read_csv('benchmark.csv')
+    # print(data)
+    # x = data['log10']
+    # y = data['average-time'] * 1000
+    # axes[0].bar(x, y)
+    # axes[0].set_xlabel('log10(n)')
+    # axes[0].set_ylabel('average-time')
+    # y_exponent = []
+    # for i in x:
+    #     y_exponent.append(7*2**i) 
+    # axes[0].plot(x, y_exponent, color='red')
+
+    # y = np.log2(data['average-time'] * 1000)
+    # axes[1].bar(x, y)
+    # axes[1].set_xlabel('log10(n)')
+    # axes[1].set_ylabel('log(average-time)')
+    # helper.plot_diagonal(axes[1], color='red')
+
+    # plt.show()
