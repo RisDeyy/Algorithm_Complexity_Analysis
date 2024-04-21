@@ -109,26 +109,33 @@ def aks(n):
         return step3(n, r) and (step4(n, r) or step5(n, r))
     return False
 
+def aks_concurrency(n):
+    if step1(n):
+        r = step2(n)
+        return step3(n, r) and (step4(n, r) or step5_concurrency(n, r))
+    return False
+
 if __name__ == '__main__':
     # max_r = []
-    # for k in range(2,20):
+    # for k in range(20):
     #     n = 2**k
     #     result = []
-    #     for i in range (2,n):
+    #     for i in range (2**(k-1)+1, 2**k):
     #         if test.isPrime(i):
     #             result.append(step2(i))
     #     max_r.append(max(result))
     # print(max_r)
-    # fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(10, 4))
 
+    fig, axes = plt.subplots(nrows=1, ncols=1, figsize=(10, 4))
     data = pd.read_csv('max_r.csv')
     print(data)
     x = data['log2']
     y = data['r']
-    axes[0].bar(x, y)
-    axes[0].set_xlabel('log2(n)')
-    axes[0].set_ylabel('r-value')
-    
-    helper.plot_diagonal(axes[0], 'red')
+    axes.bar(x, y)
+    axes.set_xlim(6,22)
+    axes.set_xlabel('log2(n)')
+    axes.set_ylabel('r-value')
+    axes.set_title('Giá tri step2(n)')
+    helper.plot_diagonal(axes, 'red')
 
     plt.show()
